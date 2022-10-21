@@ -11,10 +11,28 @@ public class Exemplo4 {
         valor1 = Integer.parseInt(args[0]);
         valor2 = Integer.parseInt(args[1]);
 
-        System.out.println("Primeiro teste");
         if (valor1 < 5) {
             res = optMat.multiplicar(valor1, valor2);
             System.out.println(valor1 + " * " + valor2 + " = " + res);
+        }
+        else
+        {
+            res = optMat.somar(valor1, valor2);
+            System.out.println(valor1 + " + " + valor2 + " = " + res);
+        }
+
+        if ((valor1 > valor2) && (valor2 != 0)) {
+            res = optMat.subtrair(valor1, valor2);
+            System.out.println(valor1 + " - " + valor2 + " = " + res);
+        }
+        else if ((valor1 == valor2) || (valor1 > 10))
+        {
+            res = optMat.dividir(valor1, valor2);
+            System.out.println(valor1 + " / " + valor2 + " = " + res);
+        }
+        else
+        {
+            System.out.println("Nenhum critério atendido. ");
         }
     }
 }
