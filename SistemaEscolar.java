@@ -1,16 +1,15 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class SistemaEscolar {
     private Escola e1;
     BufferedReader reader;
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
         SistemaEscolar se = new SistemaEscolar();
         se.e1 = new Escola();
         se.reader = new BufferedReader(
-                new InputStreamReader(System.in)
-        );
+                new InputStreamReader(System.in));
         System.out.println("Informe o número da escola: ");
         se.e1.setNome(se.reader.readLine());
 
@@ -18,11 +17,9 @@ public class SistemaEscolar {
         se.e1.setFone(se.reader.readLine());
     }
 
-    public void menu () throws Exception
-    {
+    public void menu() throws Exception {
         String opcao = "";
-        while (!opcao.equals("4"))
-        {
+        while (!opcao.equals("4")) {
             System.out.println("---------------------------");
             System.out.println("[1] Cadastrar nova turma: ");
             System.out.println("[2] Listar as turmas existentes: ");
@@ -30,8 +27,7 @@ public class SistemaEscolar {
             System.out.println("[4] Sair: ");
 
             opcao = this.reader.readLine();
-            switch (opcao)
-            {
+            switch (opcao) {
                 case "1":
                     this.cadastrarTurma();
                     break;
@@ -60,13 +56,11 @@ public class SistemaEscolar {
         turma.setAno(Integer.parseInt(this.reader.readLine()));
 
         System.out.println("-------------Alunos--------------");
-        for (int iterator = 0; iterator < 40; iterator++)
-        {
+        for (int iterator = 0; iterator < 40; iterator++) {
             System.out.println("Digite o nome do aluno: ");
             Aluno aluno = new Aluno();
             String nome = this.reader.readLine();
-            if (nome.isBlank() || nome.isEmpty())
-            {
+            if (nome.isBlank() || nome.isEmpty()) {
                 break;
             }
             aluno.setNome(nome);

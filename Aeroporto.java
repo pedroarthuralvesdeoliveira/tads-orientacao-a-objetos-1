@@ -1,39 +1,58 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Aeroporto 
-{
+public class Aeroporto {
     private Companhia companhia;
     BufferedReader reader;
 
-    public Aeroporto ()
-    {
-        Companhia companhia = new Companhia();
-    }
-
-    public Companhia getCompanhia(int posicao)
-    {
+    public Companhia getCompanhia(int posicao) {
         return this.companhia;
     }
 
-    public void setCompanhia(Companhia companhia)
-    {
+    public void setCompanhia(Companhia companhia) {
         this.companhia = companhia;
     }
 
-    public static void main(String[] args) throws Exception
-    {
-        Aeroporto aeroporto = new Aeroporto();
-        aeroporto.reader = new BufferedReader(
-                new InputStreamReader(System.in)
-        );
+    public static void main(String[] args) throws Exception {
+        try {
+            Aeroporto aeroporto = new Aeroporto();
+            aeroporto.companhia = new Companhia();
+            aeroporto.reader = new BufferedReader(
+                    new InputStreamReader(System.in));
 
-        aeroporto.cadastrarCompanhia();
+            aeroporto.cadastrarCompanhia();
+            String opcao = "";
+            while (!opcao.equals("4")) {
+                System.out.println("---------------------------");
+                System.out.println("[1] Cadastrar voo: ");
+                System.out.println("[2] Listar os voos existentes: ");
+                System.out.println("[3] Consultar determinado voo: ");
+                System.out.println("[4] Sair: ");
+
+                opcao = aeroporto.reader.readLine();
+                switch (opcao) {
+                    case "1":
+                        aeroporto.cadastrarVoo();
+                        break;
+                    case "2":
+                        aeroporto.consultarVoos();
+                        break;
+                        aeroporto.consultarVoo();
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-
-    public void cadastrarCompanhia() throws Exception
-    {
+    public void cadastrarCompanhia() throws Exception {
         System.out.println("\nInforme o CNPJ da empresa: ");
         this.companhia.setCNPJ(this.reader.readLine());
 
@@ -46,8 +65,7 @@ public class Aeroporto
         this.setCompanhia(this.companhia);
     }
 
-    public void cadastrarVoo() throws Exception
-    {
+    public void cadastrarVoo() throws Exception {
         Voo voo = new Voo();
         System.out.println("[Cadastro de voo]:  ");
         System.out.println("Informe o nº do voo: ");
@@ -57,13 +75,11 @@ public class Aeroporto
         voo.setData(this.reader.readLine());
 
         System.out.println("\n-------------Passageiros--------------");
-        for (int i = 0; i < 180; i++)
-        {
+        for (int i = 0; i < 180; i++) {
             Passageiro passageiro = new Passageiro();
             System.out.println("Digite o nome do passageiro: ");
             String nome = this.reader.readLine();
-            if (nome.isBlank() || nome.isEmpty())
-            {
+            if (nome.isBlank() || nome.isEmpty()) {
                 break;
             }
 
@@ -81,5 +97,16 @@ public class Aeroporto
             voo.setPassageiro(passageiro);
         }
         this.companhia.setVoo(voo);
+    }
+
+    public void consultarVoo() throws Exception {
+        System.out.println("Informe o código do voo: ");
+        String codigo = this.reader.readLine();
+        for (int i = 0; i < 100; i++) {
+            // TODO: Make the search for a fly that's corresponds to this code
+        }
+        if (codigo.isBlank() || codigo.isEmpty()) {
+            // break;
+        }
     }
 }
