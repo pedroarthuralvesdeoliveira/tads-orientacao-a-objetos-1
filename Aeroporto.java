@@ -35,10 +35,10 @@ public class Aeroporto {
                         aeroporto.cadastrarVoo();
                         break;
                     case "2":
-                        aeroporto.consultarVoos();
+                        aeroporto.ListarVoos();
                         break;
-                        aeroporto.consultarVoo();
                     case "3":
+                        aeroporto.consultarVoo();
                         break;
                     case "4":
                         break;
@@ -53,60 +53,84 @@ public class Aeroporto {
     }
 
     public void cadastrarCompanhia() throws Exception {
-        System.out.println("\nInforme o CNPJ da empresa: ");
-        this.companhia.setCNPJ(this.reader.readLine());
+        try {
+            System.out.println("\nInforme o CNPJ da empresa: ");
+            this.companhia.setCNPJ(this.reader.readLine());
 
-        System.out.println("\nInforme o nome da empresa: ");
-        this.companhia.setNome(this.reader.readLine());
+            System.out.println("\nInforme o nome da empresa: ");
+            this.companhia.setNome(this.reader.readLine());
 
-        System.out.println("\nInforme o telefone da empresa: ");
-        this.companhia.setTelefone(this.reader.readLine());
+            System.out.println("\nInforme o telefone da empresa: ");
+            this.companhia.setTelefone(this.reader.readLine());
 
-        this.setCompanhia(this.companhia);
+            this.setCompanhia(this.companhia);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void cadastrarVoo() throws Exception {
-        Voo voo = new Voo();
-        System.out.println("[Cadastro de voo]:  ");
-        System.out.println("Informe o nº do voo: ");
-        voo.setCodigo(this.reader.readLine());
+        try {
+            Voo voo = new Voo();
+            System.out.println("[Cadastro de voo]:  ");
+            System.out.println("Informe o nº do voo: ");
+            voo.setCodigo(this.reader.readLine());
 
-        System.out.println("\nInforme a data do voo: ");
-        voo.setData(this.reader.readLine());
+            System.out.println("\nInforme a data do voo: ");
+            voo.setData(this.reader.readLine());
 
-        System.out.println("\n-------------Passageiros--------------");
-        for (int i = 0; i < 180; i++) {
-            Passageiro passageiro = new Passageiro();
-            System.out.println("Digite o nome do passageiro: ");
-            String nome = this.reader.readLine();
-            if (nome.isBlank() || nome.isEmpty()) {
-                break;
+            System.out.println("\n-------------Passageiros--------------");
+            for (int i = 0; i < 180; i++) {
+                Passageiro passageiro = new Passageiro();
+                System.out.println("Digite o nome do passageiro: ");
+                String nome = this.reader.readLine();
+                if (nome.isBlank() || nome.isEmpty()) {
+                    break;
+                }
+
+                passageiro.setNome(nome);
+
+                System.out.println("\nDigite o CPF do passageiro: ");
+                passageiro.setCpf(this.reader.readLine());
+
+                System.out.println("\nDigite o telefone do passageiro: ");
+                passageiro.setTelefone(this.reader.readLine());
+
+                System.out.println("\nDigite o passaporte do passageiro: ");
+                passageiro.setPassaporte(this.reader.readLine());
+
+                voo.setPassageiro(passageiro);
             }
-
-            passageiro.setNome(nome);
-
-            System.out.println("\nDigite o CPF do passageiro: ");
-            passageiro.setCpf(this.reader.readLine());
-
-            System.out.println("\nDigite o telefone do passageiro: ");
-            passageiro.setTelefone(this.reader.readLine());
-
-            System.out.println("\nDigite o passaporte do passageiro: ");
-            passageiro.setPassaporte(this.reader.readLine());
-
-            voo.setPassageiro(passageiro);
+            this.companhia.setVoo(voo);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.companhia.setVoo(voo);
     }
 
     public void consultarVoo() throws Exception {
-        System.out.println("Informe o código do voo: ");
-        String codigo = this.reader.readLine();
-        for (int i = 0; i < 100; i++) {
-            // TODO: Make the search for a fly that's corresponds to this code
-        }
-        if (codigo.isBlank() || codigo.isEmpty()) {
-            // break;
+        try {
+            System.out.println("Informe o código do voo: ");
+            String codigo = this.reader.readLine();
+            for (int i = 0; i < 100; i++) {
+                if (codigo.isBlank() || codigo.isEmpty()) {
+                    break;
+                }
+
+                if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
+                    System.out.println(this.companhia.getVoo(i));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    public void ListarVoos() throws Exception {
+        try {
+            System.out.println(this.companhia.getVoo(this.companhia.getQuantidadeVoos()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
