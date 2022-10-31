@@ -1,12 +1,10 @@
-public class Voo 
-{
+public class Voo {
     private String codigo;
     private String data;
     private Passageiro[] vetorPassageiros;
     private int quantidadePassageiros;
 
-    public Voo()
-    {
+    public Voo() {
         this.vetorPassageiros = new Passageiro[180];
         quantidadePassageiros = 0;
     }
@@ -27,22 +25,26 @@ public class Voo
         this.data = data;
     }
 
-    public Passageiro getPassageiro(int posicao)
-    {
+    public Passageiro getPassageiro(int posicao) {
         return this.vetorPassageiros[posicao];
     }
 
-    public void setPassageiro(Passageiro passageiro)
-    {
-        if (quantidadePassageiros < 180)
-        {
+    public void setPassageiro(Passageiro passageiro) {
+        if (quantidadePassageiros < 180) {
             vetorPassageiros[quantidadePassageiros] = passageiro;
             quantidadePassageiros++;
         }
     }
 
-    public int getQuantidadePassageiros()
-    {
+    public int getQuantidadePassageiros() {
         return this.quantidadePassageiros;
+    }
+
+    public String infoVoo() {
+        String quantidadePassageiros = (this.getQuantidadePassageiros() > 0) ? " passageiros" : " passageiro";
+        String mensagemQuantidadePassageiros = "Voo de codigo " + this.getCodigo() + ", a ser realizado na data: "
+                + this.getData()
+                + ", com " + this.getQuantidadePassageiros() + quantidadePassageiros;
+        return mensagemQuantidadePassageiros;
     }
 }

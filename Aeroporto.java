@@ -72,7 +72,7 @@ public class Aeroporto {
         try {
             Voo voo = new Voo();
             System.out.println("[Cadastro de voo]:  ");
-            System.out.println("Informe o nº do voo: ");
+            System.out.println("Informe o codigo do voo: ");
             voo.setCodigo(this.reader.readLine());
 
             System.out.println("\nInforme a data do voo: ");
@@ -91,12 +91,18 @@ public class Aeroporto {
             System.out.println("Informe o código do voo: ");
             String codigo = this.reader.readLine();
             for (int i = 0; i < 100; i++) {
+                if (this.companhia.getQuantidadeVoos() < 1) {
+                    System.out.println("Nao ha voo cadastrado.");
+                    break;
+                }
                 if (codigo.isBlank() || codigo.isEmpty()) {
                     break;
                 }
 
-                if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
-                    System.out.println(this.companhia.getVoo(i));
+                if (this.companhia.getVoo(i) != null) {
+                    if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
+                        System.out.println(this.companhia.getVoo(i).infoVoo());
+                    }
                 }
             }
         } catch (Exception e) {
@@ -106,7 +112,15 @@ public class Aeroporto {
 
     public void ListarVoos() throws Exception {
         try {
-            System.out.println(this.companhia.getVoo(this.companhia.getQuantidadeVoos()));
+            for (int i = (this.companhia.getQuantidadeVoos() > 0) ? this.companhia.getQuantidadeVoos()
+                    : 0; i < 100; i++) {
+                if (this.companhia.getQuantidadeVoos() < 1) {
+                    System.out.println("Nao ha voo cadastrado.");
+                    break;
+                }
+                if (this.companhia.getVoo(i) != null)
+                    System.out.println(this.companhia.getVoo(i).infoVoo());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,33 +130,34 @@ public class Aeroporto {
         try {
             System.out.println("\n-------------Passageiros--------------");
             int i;
+            String opcao = "";
             for (i = (voo.getQuantidadePassageiros() > 0) ? voo.getQuantidadePassageiros() : 0; i < 100; i++) {
-                Passageiro passageiro = new Passageiro();
-                String opcao = "";
-
-                do {
-                    System.out.println("Digite o nome do passageiro: ");
-                    String nome = this.reader.readLine();
-                    if (nome.isBlank() || nome.isEmpty()) {
+                if (voo.getQuantidadePassageiros() > 0) {
+                    System.out.println("Deseja continuar cadastrando passageiros? [S] para sim, [N] para não: ");
+                    opcao = this.reader.readLine();
+                    if (!opcao.toUpperCase().equals("S")) {
                         break;
                     }
+                }
+                Passageiro passageiro = new Passageiro();
+                System.out.println("Digite o nome do passageiro: ");
+                String nome = this.reader.readLine();
+                if (nome.isBlank() || nome.isEmpty()) {
+                    break;
+                }
 
-                    passageiro.setNome(nome);
+                passageiro.setNome(nome);
 
-                    System.out.println("\nDigite o CPF do passageiro: ");
-                    passageiro.setCpf(this.reader.readLine());
+                System.out.println("\nDigite o CPF do passageiro: ");
+                passageiro.setCpf(this.reader.readLine());
 
-                    System.out.println("\nDigite o telefone do passageiro: ");
-                    passageiro.setTelefone(this.reader.readLine());
+                System.out.println("\nDigite o telefone do passageiro: ");
+                passageiro.setTelefone(this.reader.readLine());
 
-                    System.out.println("\nDigite o passaporte do passageiro: ");
-                    passageiro.setPassaporte(this.reader.readLine());
+                System.out.println("\nDigite o passaporte do passageiro: ");
+                passageiro.setPassaporte(this.reader.readLine());
 
-                    voo.setPassageiro(passageiro);
-
-                    System.out.println("Deseja continuar? [S] para sim, [N] para não. \n");
-                    opcao = this.reader.readLine().toUpperCase();
-                } while (!opcao.equals("N"));
+                voo.setPassageiro(passageiro);
             }
         } catch (Exception e) {
             e.printStackTrace();
