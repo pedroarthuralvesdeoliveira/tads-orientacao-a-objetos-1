@@ -41,7 +41,7 @@ public class Voo {
     }
 
     public String infoVoo() {
-        String quantidadePassageiros = (this.getQuantidadePassageiros() > 0) ? " passageiros" : " passageiro";
+        String quantidadePassageiros = (this.getQuantidadePassageiros() > 1) ? " passageiros" : " passageiro";
         String mensagemQuantidadePassageiros = "Voo de codigo " + this.getCodigo() + ", a ser realizado na data: "
                 + this.getData()
                 + ", com " + this.getQuantidadePassageiros() + quantidadePassageiros;

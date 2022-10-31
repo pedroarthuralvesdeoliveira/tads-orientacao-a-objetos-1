@@ -72,6 +72,7 @@ public class Aeroporto {
         try {
             Voo voo = new Voo();
             System.out.println("[Cadastro de voo]:  ");
+
             System.out.println("Informe o codigo do voo: ");
             voo.setCodigo(this.reader.readLine());
 
@@ -102,6 +103,8 @@ public class Aeroporto {
                 if (this.companhia.getVoo(i) != null) {
                     if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
                         System.out.println(this.companhia.getVoo(i).infoVoo());
+                    } else {
+                        System.out.println("Nao existe voo com esse codigo. ");
                     }
                 }
             }
@@ -112,14 +115,15 @@ public class Aeroporto {
 
     public void ListarVoos() throws Exception {
         try {
-            for (int i = (this.companhia.getQuantidadeVoos() > 0) ? this.companhia.getQuantidadeVoos()
-                    : 0; i < 100; i++) {
+            for (int i = 0; i < 100; i++) {
                 if (this.companhia.getQuantidadeVoos() < 1) {
                     System.out.println("Nao ha voo cadastrado.");
                     break;
                 }
-                if (this.companhia.getVoo(i) != null)
+                if (this.companhia.getVoo(i) != null) {
                     System.out.println(this.companhia.getVoo(i).infoVoo());
+                    System.out.println("\n");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
