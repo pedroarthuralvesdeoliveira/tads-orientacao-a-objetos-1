@@ -36,7 +36,7 @@ public class Aeroporto {
                         aeroporto.cadastrarVoo();
                         break;
                     case "2":
-                        aeroporto.ListarVoos();
+                        aeroporto.listarVoos();
                         break;
                     case "3":
                         aeroporto.consultarVoo();
@@ -103,6 +103,8 @@ public class Aeroporto {
                 if (this.companhia.getVoo(i) != null) {
                     if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
                         System.out.println(this.companhia.getVoo(i).infoVoo());
+                        System.out.println("\nDados dos passageiros deste voo: \n");
+                        this.listarDadosPassageiros(this.companhia.getVoo(i));
                     } else {
                         System.out.println("Nao existe voo com esse codigo. ");
                     }
@@ -113,7 +115,7 @@ public class Aeroporto {
         }
     }
 
-    public void ListarVoos() throws Exception {
+    public void listarVoos() throws Exception {
         try {
             for (int i = 0; i < 100; i++) {
                 if (this.companhia.getQuantidadeVoos() < 1) {
@@ -135,7 +137,7 @@ public class Aeroporto {
             System.out.println("\n-------------Passageiros--------------");
             int i;
             String opcao = "";
-            for (i = (voo.getQuantidadePassageiros() > 0) ? voo.getQuantidadePassageiros() : 0; i < 100; i++) {
+            for (i = (voo.getQuantidadePassageiros() > 0) ? voo.getQuantidadePassageiros() : 0; i < 180; i++) {
                 if (voo.getQuantidadePassageiros() > 0) {
                     System.out.println("Deseja continuar cadastrando passageiros? [S] para sim, [N] para não: ");
                     opcao = this.reader.readLine();
@@ -163,6 +165,19 @@ public class Aeroporto {
 
                 voo.setPassageiro(passageiro);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void listarDadosPassageiros(Voo voo) throws Exception {
+        try {
+            for (int i = 0; i < 100; i++) {
+                if (voo.getPassageiro(i) != null) {
+                    System.out.println(voo.getPassageiro(i).infoPassageiro());
+                }
+            }
+            System.out.println("\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

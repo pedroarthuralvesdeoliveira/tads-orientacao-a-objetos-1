@@ -40,11 +40,16 @@ public class Voo {
         return this.quantidadePassageiros;
     }
 
+    public int getQuantidadeAssentosSobrando() {
+        return (180 - this.getQuantidadePassageiros());
+    }
+
     public String infoVoo() {
         String quantidadePassageiros = (this.getQuantidadePassageiros() > 1) ? " passageiros" : " passageiro";
         String mensagemQuantidadePassageiros = "Voo de codigo " + this.getCodigo() + ", a ser realizado na data: "
                 + this.getData()
-                + ", com " + this.getQuantidadePassageiros() + quantidadePassageiros;
+                + ", com " + this.getQuantidadePassageiros() + quantidadePassageiros + ", e "
+                + this.getQuantidadeAssentosSobrando() + " assentos sobrando. ";
         return mensagemQuantidadePassageiros;
     }
 }
