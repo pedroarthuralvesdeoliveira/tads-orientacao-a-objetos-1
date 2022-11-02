@@ -23,13 +23,7 @@ public class Aeroporto {
             aeroporto.cadastrarCompanhia();
             String opcao = "";
             while (!opcao.equals("4")) {
-                System.out.println("---------------------------");
-                System.out.println("\nO que gostaria de fazer?");
-                System.out.println("\n[1] Cadastrar voo: ");
-                System.out.println("\n[2] Listar os voos existentes: ");
-                System.out.println("\n[3] Consultar determinado voo: ");
-                System.out.println("\n[4] Sair: ");
-
+                aeroporto.menu();
                 opcao = aeroporto.reader.readLine();
                 switch (opcao) {
                     case "1":
@@ -49,6 +43,15 @@ public class Aeroporto {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void menu() {
+        System.out.println("---------------------------");
+        System.out.println("\nO que gostaria de fazer?");
+        System.out.println("\n[1] Cadastrar voo: ");
+        System.out.println("\n[2] Listar os voos existentes: ");
+        System.out.println("\n[3] Consultar determinado voo: ");
+        System.out.println("\n[4] Sair: ");
     }
 
     public void cadastrarCompanhia() throws Exception {
@@ -96,18 +99,17 @@ public class Aeroporto {
                     System.out.println("Nao ha voo cadastrado.");
                     break;
                 }
+
                 if (codigo.isBlank() || codigo.isEmpty()) {
                     break;
                 }
 
-                if (this.companhia.getVoo(i) != null) {
-                    if (this.companhia.getVoo(i).getCodigo().equals(codigo)) {
-                        System.out.println(this.companhia.getVoo(i).infoVoo());
-                        System.out.println("\nDados dos passageiros deste voo: \n");
-                        this.listarDadosPassageiros(this.companhia.getVoo(i));
-                    } else {
-                        System.out.println("Nao existe voo com esse codigo. ");
-                    }
+                if (this.companhia.getVoo(i) != null && this.companhia.getVoo(i).getCodigo().equals(codigo)) {
+                    System.out.println(this.companhia.getVoo(i).infoVoo());
+                    System.out.println("\nDados dos passageiros deste voo: \n");
+                    this.listarDadosPassageiros(this.companhia.getVoo(i));
+                } else {
+                    System.out.println("Nao existe voo com esse codigo. ");
                 }
             }
         } catch (Exception e) {
