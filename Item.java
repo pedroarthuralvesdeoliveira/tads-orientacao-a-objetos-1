@@ -45,10 +45,10 @@ public class Item {
         this.preco = preco;
     }
 
-    public Item() {}
+    public Item() {
+    }
 
-    public Item(String categoria, String codigo, Integer estoque, String nome, Double preco)
-    {
+    public Item(String categoria, String codigo, Integer estoque, String nome, Double preco) {
         this.categoria = categoria;
         this.codigo = codigo;
         this.estoque = estoque;
@@ -56,21 +56,19 @@ public class Item {
         this.preco = preco;
     }
 
-    public Item(String codigo, String nome, Double preco)
-    {
+    public Item(String codigo, String nome, Double preco) {
         this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public String nomeCompleto() {
-        return this.getCodigo() + ";" + this.getEstoque() + ";" + this.getNome() + ";" + this.getPreco() + ";" + this.getCategoria();
+    public String nomeAbreviado() {
+        return this.getCodigo() + ";" + this.getNome() + ";" + this.getPreco();
     }
 
-
     @Override
-    public String toString()
-    {
-        return this.getCodigo() + ";" + this.getNome() + ";" + this.getPreco();
+    public String toString() {
+        return this.getCodigo() + ";" + this.getEstoque() + ";" + this.getNome() + ";" + this.getPreco() + ";"
+                + this.getCategoria();
     }
 }

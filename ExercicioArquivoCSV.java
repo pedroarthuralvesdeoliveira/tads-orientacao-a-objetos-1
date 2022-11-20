@@ -112,9 +112,9 @@ public class ExercicioArquivoCSV {
             arquivoGravacao.newLine();
             for (Item item : this.getArquivo().getItens()) {
                 if (arquivo.getTipo().equals("saida")) {
-                    arquivoGravacao.write(item.nomeCompleto());
-                } else {
                     arquivoGravacao.write(item.toString());
+                } else {
+                    arquivoGravacao.write(item.nomeAbreviado());
                 }
                 arquivoGravacao.newLine();
             }
