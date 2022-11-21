@@ -37,7 +37,7 @@ public class ExercicioArquivoCSV {
         }
     }
 
-    public void menu() throws Exception {
+    public void menu() {
         try {
             this.leituraArquivo("C:\\Users\\pa\\Downloads\\ex_arquivos\\ex_arquivos\\custo.csv");
             System.out.println("\n\nInsira os dados do arquivo de entrada \n");
@@ -89,12 +89,11 @@ public class ExercicioArquivoCSV {
             arquivoSaida.setCategoria(arquivoLeitura.readLine());
             while ((linha = arquivoLeitura.readLine()) != null) {
                 itens = linha.split(";");
-                double preco = Double.parseDouble(itens[3].trim().replaceAll(",", "."));
-                if (Integer.parseInt(itens[1]) < 10) {
-                    Item item = new Item(itens[4], itens[0], Integer.parseInt(itens[1]), itens[2], preco);
+                double preco = Double.parseDouble(itens[3].replaceAll(",", "."));
+                Item item = new Item(itens[4], itens[0], Integer.parseInt(itens[1]), itens[2], preco);
+                if ((Integer.parseInt(itens[1])) < 10) {
                     arquivoSaida.setItem(item);
                 }
-                Item item = new Item(itens[0], itens[2], preco);
                 this.getArquivo().setItem(item);
                 this.escritaArquivo(arquivoSaida);
             }
@@ -112,11 +111,15 @@ public class ExercicioArquivoCSV {
             arquivoGravacao.newLine();
             for (Item item : this.getArquivo().getItens()) {
                 if (arquivo.getTipo().equals("saida")) {
-                    arquivoGravacao.write(item.toString());
+                    if (item.getEstoque() < 10)
+                    {
+                        arquivoGravacao.write(item.toString());
+                        arquivoGravacao.newLine();
+                    }
                 } else {
                     arquivoGravacao.write(item.nomeAbreviado());
+                    arquivoGravacao.newLine();
                 }
-                arquivoGravacao.newLine();
             }
             arquivoGravacao.close();
         } catch (IOException e) {
