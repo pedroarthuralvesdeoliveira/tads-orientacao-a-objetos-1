@@ -15,7 +15,7 @@ public class ExemploLocalDateTime {
         System.out.println(dataHora);
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String dataFormatada = dataHora.format(formato);
+        // String dataFormatada = dataHora.format(formato);
 
         LocalDate hoje = LocalDate.now();
         LocalDate amanha = hoje.plusDays(1);
