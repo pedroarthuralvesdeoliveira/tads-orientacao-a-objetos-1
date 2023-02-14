@@ -1,8 +1,8 @@
-import java.sql.Date;
+import java.util.GregorianCalendar;
 
 public class Encomenda {
     private int numeroPedido;
-    private Date dataPostagem;
+    private GregorianCalendar dataPostagem;
     private float peso;
 
     public int getNumeroPedido() {
@@ -13,11 +13,11 @@ public class Encomenda {
         this.numeroPedido = numeroPedido;
     }
 
-    public Date getDataPostagem() {
+    public GregorianCalendar getDataPostagem() {
         return dataPostagem;
     }
 
-    public void setDataPostagem(Date dataPostagem) {
+    public void setDataPostagem(GregorianCalendar dataPostagem) {
         this.dataPostagem = dataPostagem;
     }
 

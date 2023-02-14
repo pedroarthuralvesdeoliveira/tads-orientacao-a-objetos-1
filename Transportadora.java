@@ -25,7 +25,7 @@ public class Transportadora implements ImportacaoArquivos {
 
     public void setEncomenda(Encomenda encomenda)
     {
-        if (quantidadeEncomenda < 100)
+        if (quantidadeEncomenda < 1000)
         {
             encomendas[quantidadeEncomenda] = encomenda;
             quantidadeEncomenda++;
@@ -38,7 +38,7 @@ public class Transportadora implements ImportacaoArquivos {
 
     public void setEncomendaExpressa(EncomendaExpressa encomendaExpressa)
     {
-        if (quantidadeEncomendaExpressa < 100)
+        if (quantidadeEncomendaExpressa < 1000)
         {
             encomendasExpressas[quantidadeEncomendaExpressa] = encomendaExpressa;
             quantidadeEncomendaExpressa++;

@@ -20,6 +20,8 @@ public class ProgramaTransportadora {
 
         programa.transportadora = new Transportadora();
 
+        System.out.println("\nInforme o nome do arquivo de configuração: ");
+
         String opcao = "";
         while (!opcao.equals("4")) {
             System.out.println("---------------------------");
