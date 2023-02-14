@@ -66,7 +66,7 @@ public class SistemaEscolar {
             aluno.setNome(nome);
 
             System.out.println("Digite a matrícula do aluno: ");
-            aluno.setMatricula(this.reader.readLine());
+            // aluno.setMatricula(this.reader.readLine());
 
             System.out.println("Digite as notas do aluno: ");
             aluno.setNota1(Float.parseFloat(this.reader.readLine()));
