@@ -17,4 +17,10 @@ public class EncomendaExpressa  extends Encomenda {
     public void setContatoRecebedor(String contatoRecebedor) {
         this.contatoRecebedor = contatoRecebedor;
     }
+
+    @Override
+    public float calculoFrete(float precoKG) {
+        float frete = this.getPeso() * precoKG; 
+        return frete + (frete * 0.25f);
+    }
 }

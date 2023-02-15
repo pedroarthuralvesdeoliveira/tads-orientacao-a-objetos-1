@@ -29,8 +29,8 @@ public class Encomenda {
         this.peso = peso;
     }
 
-    public float calculoFrete() {
-        return this.getPeso() * this.get
+    public float calculoFrete(float precoKG) {
+        return this.getPeso() * precoKG;
     }
 
     @Override
