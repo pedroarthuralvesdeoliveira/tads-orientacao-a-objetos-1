@@ -28,4 +28,13 @@ public class Encomenda {
     public void setPeso(float peso) {
         this.peso = peso;
     }
+
+    public float calculoFrete() {
+
+    }
+
+    @Override
+    public String toString() {
+        return this.getNumeroPedido() + "; " + this.getPeso() + "; ";
+    }
 }

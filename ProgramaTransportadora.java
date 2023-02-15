@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class ProgramaTransportadora {   
+public class ProgramaTransportadora {
     private Transportadora transportadora;
     BufferedReader reader;
 
@@ -12,11 +12,11 @@ public class ProgramaTransportadora {
     public void setTransportadora(Transportadora transportadora) {
         this.transportadora = transportadora;
     }
-    
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
         ProgramaTransportadora programa = new ProgramaTransportadora();
         programa.reader = new BufferedReader(
-            new InputStreamReader(System.in));
+                new InputStreamReader(System.in));
 
         programa.transportadora = new Transportadora();
 
@@ -50,14 +50,14 @@ public class ProgramaTransportadora {
     }
 
     public void exibirEncomendasExpressas() {
-        
+        this.transportadora.getEncomendasExpressas();
     }
 
     public void exibirEncomendasNormais() {
-        
+        this.transportadora.getEncomendas();
     }
 
     public void importarArquivoEncomenda() {
-        
+
     }
 }
