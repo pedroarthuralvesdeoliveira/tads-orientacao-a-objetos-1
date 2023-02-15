@@ -30,7 +30,7 @@ public class Encomenda {
     }
 
     public float calculoFrete() {
-
+        return this.getPeso() * this.get
     }
 
     @Override
