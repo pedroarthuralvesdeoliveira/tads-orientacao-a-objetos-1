@@ -16,12 +16,20 @@ Transportadora
         Nro pedido; peso; valor do frete
 
 #### Classes  
-    Transportadora
     Encomendas
     Encomendas expressas
+    Programa Transportadora
+    Transportadora
 
 #### Interfaces
     ImportarArquivo
         métodos:  
             1. carregarConfiguracoes(String arqConfig)
             2. importarDados(String arqDadosEntrada)
+
+##### Regra de cálculo de valor de frete
+    **Normal** 
+        Multiplica o peso pelo preço por KG.
+    **Expressa** 
+        Caso o prazo de entrega seja 3 dias ou mais, multiplica peso pelo preço por KG.
+        Caso o prazo de entrega seja até 2 dias, multiplica peso pelo preço por KG, e acrescenta 25%.

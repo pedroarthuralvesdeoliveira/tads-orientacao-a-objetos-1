@@ -1,9 +1,8 @@
-import java.util.GregorianCalendar;
-
 public class Encomenda {
-    private int numeroPedido;
-    private GregorianCalendar dataPostagem;
-    private float peso;
+    protected int numeroPedido;
+    protected String dataPostagem;
+    protected float peso;
+    protected float valorFrete;
 
     public int getNumeroPedido() {
         return numeroPedido;
@@ -13,11 +12,11 @@ public class Encomenda {
         this.numeroPedido = numeroPedido;
     }
 
-    public GregorianCalendar getDataPostagem() {
+    public String getDataPostagem() {
         return dataPostagem;
     }
 
-    public void setDataPostagem(GregorianCalendar dataPostagem) {
+    public void setDataPostagem(String dataPostagem) {
         this.dataPostagem = dataPostagem;
     }
 
@@ -33,8 +32,25 @@ public class Encomenda {
         return this.getPeso() * precoKG;
     }
 
+    public float getValorFrete() {
+        return valorFrete;
+    }
+
+    public void setValorFrete(float valorFrete) {
+        this.valorFrete = valorFrete;
+    }
+
     @Override
     public String toString() {
-        return this.getNumeroPedido() + "; " + this.getPeso() + "; ";
+        return numeroPedido + "; " + peso + "; " + valorFrete;
+    }
+
+    public Encomenda() {
+    }
+
+    public Encomenda(int numeroPedido, String dataPostagem, float peso) {
+        this.numeroPedido = numeroPedido;
+        this.dataPostagem = dataPostagem;
+        this.peso = peso;
     }
 }

@@ -21,6 +21,8 @@ public class ProgramaTransportadora {
         programa.transportadora = new Transportadora();
 
         System.out.println("\nInforme o nome do arquivo de configuração: ");
+        String arquivoConfiguracao = programa.reader.readLine();
+        programa.transportadora.carregarConfiguracoes(arquivoConfiguracao);
 
         String opcao = "";
         while (!opcao.equals("4")) {
@@ -33,13 +35,15 @@ public class ProgramaTransportadora {
             opcao = programa.reader.readLine();
             switch (opcao) {
                 case "1":
-                    programa.importarArquivoEncomenda();
+                    System.out.println("\nInforme o nome do arquivo de dados: ");
+                    String nomeArquivo = programa.reader.readLine();
+                    programa.transportadora.importarDados(nomeArquivo);
                     break;
                 case "2":
-                    programa.exibirEncomendasNormais();
+                    programa.transportadora.getEncomendas();
                     break;
                 case "3":
-                    programa.exibirEncomendasExpressas();
+                    programa.transportadora.getEncomendasExpressas();
                     break;
                 case "4":
                     break;
@@ -47,17 +51,5 @@ public class ProgramaTransportadora {
                     break;
             }
         }
-    }
-
-    public void exibirEncomendasExpressas() {
-        this.transportadora.getEncomendasExpressas();
-    }
-
-    public void exibirEncomendasNormais() {
-        this.transportadora.getEncomendas();
-    }
-
-    public void importarArquivoEncomenda() {
-
     }
 }

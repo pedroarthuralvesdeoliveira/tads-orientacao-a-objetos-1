@@ -1,4 +1,4 @@
-public class EncomendaExpressa  extends Encomenda {
+public class EncomendaExpressa extends Encomenda {
     private int prazoEntrega;
     private String contatoRecebedor;
 
@@ -18,9 +18,22 @@ public class EncomendaExpressa  extends Encomenda {
         this.contatoRecebedor = contatoRecebedor;
     }
 
-    @Override
-    public float calculoFrete(float precoKG) {
-        float frete = this.getPeso() * precoKG; 
+    public float calculoFretePorPrazo(float precoKG, int prazoEntrega) {
+        if (prazoEntrega > 3) {
+            return super.calculoFrete(precoKG);
+        }
+        float frete = this.getPeso() * precoKG;
         return frete + (frete * 0.25f);
+    }
+
+    public EncomendaExpressa() {
+
+    }
+
+    public EncomendaExpressa(int numeroPedido, String dataPostagem, float peso, int prazoEntrega,
+            String contatoRecebedor) {
+        super(numeroPedido, dataPostagem, peso);
+        this.prazoEntrega = prazoEntrega;
+        this.contatoRecebedor = contatoRecebedor;
     }
 }

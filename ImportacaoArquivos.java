@@ -1,4 +1,5 @@
 public interface ImportacaoArquivos {
-    void carregarConfiguracoes(String arquivoConfiguração);
+    void carregarConfiguracoes(String arquivoConfiguracao);
+
     void importarDados(String arquivoDadosEntrada);
 }
