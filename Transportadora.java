@@ -23,7 +23,7 @@ public class Transportadora implements ImportacaoArquivos {
 
     public void getEncomendas() {
         try {
-            for (int i = 0; i < configuracoes.length; i++) {
+            for (int i = 0; i < quantidadeEncomenda; i++) {
                 System.out.println(getEncomenda(i));
             }
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class Transportadora implements ImportacaoArquivos {
     public void getEncomendasExpressas() {
         try {
             if (configuracoes != null) {
-                for (int i = 0; i < configuracoes.length; i++) {
+                for (int i = 0; i < quantidadeEncomendaExpressa; i++) {
                     System.out.println(getEncomendaExpressa(i));
                 }
             } else {
