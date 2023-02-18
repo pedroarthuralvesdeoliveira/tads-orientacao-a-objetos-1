@@ -48,9 +48,8 @@ public class Encomenda {
     public Encomenda() {
     }
 
-    public Encomenda(int numeroPedido, String dataPostagem, float peso) {
+    public Encomenda(int numeroPedido, float peso) {
         this.numeroPedido = numeroPedido;
-        this.dataPostagem = dataPostagem;
         this.peso = peso;
     }
 }

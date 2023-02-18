@@ -32,8 +32,9 @@ public class EncomendaExpressa extends Encomenda {
 
     public EncomendaExpressa(int numeroPedido, String dataPostagem, float peso, int prazoEntrega,
             String contatoRecebedor) {
-        super(numeroPedido, dataPostagem, peso);
+        super(numeroPedido, peso);
         this.prazoEntrega = prazoEntrega;
         this.contatoRecebedor = contatoRecebedor;
+        this.dataPostagem = dataPostagem;
     }
 }

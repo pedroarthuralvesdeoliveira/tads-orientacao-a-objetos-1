@@ -33,3 +33,9 @@ Transportadora
     **Expressa** 
         Caso o prazo de entrega seja 3 dias ou mais, multiplica peso pelo preço por KG.
         Caso o prazo de entrega seja até 2 dias, multiplica peso pelo preço por KG, e acrescenta 25%.
+
+##### Estrutura das colunas
+    1. Configuração
+        Tipo Encomenda; Sigla Tipo; Preco kg
+    2. Dados
+        Nro pedido; Data postagem; Tipo encomenda; Prazo Entrega; Peso; Fone Contato

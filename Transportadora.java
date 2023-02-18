@@ -4,10 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Transportadora implements ImportacaoArquivos {
+    BufferedReader arquivoLeitura;
     private Encomenda[] encomendas;
     private EncomendaExpressa[] encomendasExpressas;
     private int quantidadeEncomenda;
     private int quantidadeEncomendaExpressa;
+    private float valorEncomendaNormal;
+    private float valorEncomendaExpressa;
+    String linha;
+    String[] configuracoes;
 
     public Transportadora() {
         this.encomendas = new Encomenda[1000];
@@ -16,16 +21,32 @@ public class Transportadora implements ImportacaoArquivos {
         quantidadeEncomendaExpressa = 0;
     }
 
-    public String getEncomendas() {
-        return encomendas.toString();
+    public void getEncomendas() {
+        try {
+            for (int i = 0; i < configuracoes.length; i++) {
+                System.out.println(getEncomenda(i));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getEncomendasExpressas() {
-        return encomendasExpressas.toString();
+    public void getEncomendasExpressas() {
+        try {
+            if (configuracoes != null) {
+                for (int i = 0; i < configuracoes.length; i++) {
+                    System.out.println(getEncomendaExpressa(i));
+                }
+            } else {
+                System.out.println("Não há encomendas expressas");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public Encomenda getEncomenda(int posicao) {
-        return encomendas[posicao];
+    public String getEncomenda(int posicao) {
+        return encomendas[posicao].toString();
     }
 
     public void setEncomenda(Encomenda encomenda) {
@@ -35,8 +56,8 @@ public class Transportadora implements ImportacaoArquivos {
         }
     }
 
-    public Encomenda getEncomendaExpressa(int posicao) {
-        return encomendasExpressas[posicao];
+    public String getEncomendaExpressa(int posicao) {
+        return encomendasExpressas[posicao].toString();
     }
 
     public void setEncomendaExpressa(EncomendaExpressa encomendaExpressa) {
@@ -46,42 +67,72 @@ public class Transportadora implements ImportacaoArquivos {
         }
     }
 
+    public float getValorEncomendaNormal() {
+        return valorEncomendaNormal;
+    }
+
+    public void setValorEncomendaNormal(float valorEncomendaNormal) {
+        this.valorEncomendaNormal = valorEncomendaNormal;
+    }
+
+    public float getValorEncomendaExpressa() {
+        return valorEncomendaExpressa;
+    }
+
+    public void setValorEncomendaExpressa(float valorEncomendaExpressa) {
+        this.valorEncomendaExpressa = valorEncomendaExpressa;
+    }
+
     @Override
     public void carregarConfiguracoes(String arquivo) {
-        importarDados(arquivo);
+        try {
+            arquivoLeitura = new BufferedReader(
+                    new FileReader(arquivo));
+            arquivoLeitura.readLine();
+            float precoKG;
+            while ((linha = arquivoLeitura.readLine()) != null) {
+                configuracoes = linha.split(";");
+                String siglaTipo = configuracoes[1];
+                precoKG = Float.parseFloat(configuracoes[2]);
+                if (siglaTipo.equals("EN")) {
+                    this.setValorEncomendaNormal(precoKG);
+                }
+                this.setValorEncomendaExpressa(precoKG);
+            }
+            arquivoLeitura.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void importarDados(String arquivo) {
         try {
-            BufferedReader arquivoLeitura = new BufferedReader(
+            arquivoLeitura = new BufferedReader(
                     new FileReader(arquivo));
-            String linha;
-            String[] configuracoes;
+
+            arquivoLeitura.readLine();
             while ((linha = arquivoLeitura.readLine()) != null) {
                 configuracoes = linha.split(";");
-                String tipoEncomenda = configuracoes[0];
-                float precoKG = Float.parseFloat(configuracoes[2]);
+                int numeroPedido = Integer.parseInt(configuracoes[0]);
+                float peso = Float.parseFloat(configuracoes[4]);
                 float valorFrete;
-                if (configuracoes.length > 3) {
-                    int numeroPedido = Integer.parseInt(configuracoes[0]);
-                    String dataPostagem = configuracoes[1];
-                    tipoEncomenda = configuracoes[2];
+                String dataPostagem = configuracoes[1];
+                String tipoEncomenda = configuracoes[2];
+                String foneContato = configuracoes[configuracoes.length - 1];
+                if (tipoEncomenda.equals("EN")) {
+                    Encomenda encomenda = new Encomenda(numeroPedido, peso);
+                    valorFrete = encomenda.calculoFrete(this.getValorEncomendaNormal());
+                    encomenda.setValorFrete(valorFrete);
+                    this.setEncomenda(encomenda);
+                } else {
                     int prazoEntrega = Integer.parseInt(configuracoes[3]);
-                    float peso = Float.parseFloat(configuracoes[4]);
-                    String foneContato = configuracoes[5];
-                    if (tipoEncomenda.equals("EN")) {
-                        Encomenda encomenda = new Encomenda(numeroPedido, dataPostagem, peso);
-                        valorFrete = encomenda.calculoFrete(precoKG);
-                        this.setEncomenda(encomenda);
-                    } else {
-                        EncomendaExpressa encomendaExpressa = new EncomendaExpressa(numeroPedido, dataPostagem, peso,
-                                prazoEntrega, foneContato);
-                        valorFrete = encomendaExpressa.calculoFretePorPrazo(precoKG, prazoEntrega);
-                        encomendaExpressa.setValorFrete(valorFrete);
-                        this.setEncomendaExpressa(
-                                encomendaExpressa);
-                    }
+                    EncomendaExpressa encomendaExpressa = new EncomendaExpressa(numeroPedido, dataPostagem, peso,
+                            prazoEntrega, foneContato);
+                    valorFrete = encomendaExpressa.calculoFretePorPrazo(this.getValorEncomendaExpressa(), prazoEntrega);
+                    encomendaExpressa.setValorFrete(valorFrete);
+                    this.setEncomendaExpressa(
+                            encomendaExpressa);
                 }
             }
             arquivoLeitura.close();

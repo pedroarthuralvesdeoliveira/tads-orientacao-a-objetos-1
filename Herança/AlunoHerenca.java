@@ -1,4 +1,4 @@
-public class Aluno extends Pessoa {
+public class AlunoHerenca extends Pessoa {
     private float nota1;
     private float nota2;
     private float nota3;

@@ -58,7 +58,7 @@ public class SistemaEscolar {
         System.out.println("-------------Alunos--------------");
         for (int iterator = 0; iterator < 40; iterator++) {
             System.out.println("Digite o nome do aluno: ");
-            Aluno aluno = new Aluno();
+            AlunoHerenca aluno = new AlunoHerenca();
             String nome = this.reader.readLine();
             if (nome.isBlank() || nome.isEmpty()) {
                 break;

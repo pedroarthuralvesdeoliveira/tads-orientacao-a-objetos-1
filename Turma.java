@@ -3,24 +3,19 @@ public class Turma {
     private int quantidadeAlunos;
     private String nomeCurso;
     private int numeroTurma;
-    private Aluno[] vetorAlunos;
+    private AlunoHerenca[] vetorAlunos;
 
-
-    public Turma()
-    {
-        this.vetorAlunos = new Aluno[40];
+    public Turma() {
+        this.vetorAlunos = new AlunoHerenca[40];
         this.quantidadeAlunos = 0;
     }
 
-    public Aluno getAluno(int position)
-    {
+    public AlunoHerenca getAluno(int position) {
         return vetorAlunos[position];
     }
 
-    public void setAluno(Aluno aluno)
-    {
-        if (quantidadeAlunos < 40)
-        {
+    public void setAluno(AlunoHerenca aluno) {
+        if (quantidadeAlunos < 40) {
             vetorAlunos[quantidadeAlunos] = aluno;
             quantidadeAlunos++;
         }
@@ -30,8 +25,7 @@ public class Turma {
         return ano;
     }
 
-    public void setAno(int ano)
-    {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
@@ -42,7 +36,6 @@ public class Turma {
     public void setNumeroTurma(int numeroTurma) {
         this.numeroTurma = numeroTurma;
     }
-
 
     public String getNomeCurso() {
         return nomeCurso;
